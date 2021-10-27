@@ -1,5 +1,5 @@
 import Mask from "./modules/helpers/Mask.js";
-import Pessoa from "./modules/Pessoa.js";
+import Form from "./modules/Form.js";
 
 const form = document.querySelector("form");
 const inputs = document.querySelectorAll("input");
@@ -18,31 +18,19 @@ form?.addEventListener("submit", (evt) => {
     document.querySelectorAll(".alert.alert-danger")?.forEach((alerta) => alerta.remove());
 
     let erros = [];
-    const pessoa = new Pessoa();
+    const formCep = new Form();
 
     inputs?.forEach((input) => {
         try {
             switch (input.id) {
-                case "nome":
-                    pessoa.setNome(input.value);
-                    break;
-                case "cpf":
-                    pessoa.setCPF(input.value);
-                    break;
-                case "dt_nasc":
-                    pessoa.setDataNasc(input.value);
-                    break;
-                case "email":
-                    pessoa.setEmail(input.value);
-                    break;
-                case "fone":
-                    pessoa.setFone(input.value);
-                    break;
                 case "cep":
-                    pessoa.setCEP(input.value);
+                    formCep.setCEP(input.value);
                     break;
             }
         } catch (error) {
+
+            console.error(error);
+
             erros.push({
                 campo: input.id,
                 erro: error
@@ -67,5 +55,5 @@ form?.addEventListener("submit", (evt) => {
         return;
     }
 
-    pessoa.enviar("");
+    formCep.enviar();
 });
